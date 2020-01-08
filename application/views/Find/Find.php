@@ -1,4 +1,4 @@
-<body>
+<body style="background: url(/assets/Images/Find/BackCheck.jpg); background-repeat: no-repeat">
 
 <link rel="stylesheet" type="text/css" href="/assets/css/MyStyle.css">
 <div class="container" >

@@ -1,32 +1,23 @@
-$(document).ready(function() {
-
-    $("#ok1").click(function () {
-        var pust=$("#name_SMP").val();
-        if(pust==""){
-            $("#name_SMP").after("<p id='suc'>Введите название СМП</p>");
-        }
-        else
-        {
-            var name_smp=$("#name_SMP").val();
-            $.ajax({
-                type:'ajax',
-                method:'post',
-                url:'insertto',
-                data:{
-                    'name_smp':name_smp,
-                    'name_contr'
-
-                },
-                dateType:'html'
-            });
+$(document).ready(function (){
+    $('#addsmp').click(function(){
+        var name_smp=$("#name_SMP").val();
+        Toast.add({
+            header: "Внимание",
+            body:"Запись успешно добавлена",
+            color:'#17a2b8',
+            autohide: 'true',
+            delay: 5000
+        });
+        $.ajax({
+            method:'post',
+            url:'addsmp/addsmp',
+            data:{
+                'name_smp':name_smp
+            },
 
 
-            if($("#suc").length>0){
-                $("#suc").remove();
-            }
-        }
+        });
 
     });
-
 });
 

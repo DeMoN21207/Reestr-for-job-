@@ -75,6 +75,16 @@ class Reestr_db extends CI_Model
         $this->db->insert_batch('period',$data);
 
     }
+    public function addsmp($name_smp){
+       $data=array('Name_SMP'=>$name_smp);
+        $this->db->insert('smp',$data);
+
+    }
+    public function addcontr($name_contr){
+        $data=array('Name_contr'=>$name_contr);
+        $this->db->insert('contr',$data);
+        redirect(base_url());
+    }
 
 
 }
