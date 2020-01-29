@@ -6,7 +6,7 @@ class AddOrgan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('reestr_db', 'm');
+        $this->load->model('addorgan_db', 'm');
     }
 
     public function index()
@@ -25,5 +25,16 @@ class AddOrgan extends CI_Controller
             $this->m->addcontr($name_contr);
         }
     }
+    public function valid()
+    {
+        $value = $this->input->post('name_contr');
 
+            $query = $this->m->valid($value);
+            if ($query) {
+                echo json_encode(array('result' => 'exist'));
+            } else {
+                echo json_encode(array('result' => 'notexist'));
+            }
+
+    }
 }

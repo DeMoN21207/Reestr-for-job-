@@ -10,7 +10,7 @@ class Find extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('reestr_db', 'm');
+        $this->load->model('find_db', 'm');
         $this->load->library('table');
     }
 

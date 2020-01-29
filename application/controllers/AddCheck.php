@@ -7,7 +7,7 @@ class AddCheck extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('reestr_db', 'm');
+        $this->load->model('addcheck_db', 'm');
 
     }
 
@@ -24,7 +24,7 @@ class AddCheck extends CI_Controller
     public function AddCheck()
     {
         $this->m->InsertCheck();
-        redirect(base_url());
+        redirect(base_url().'/addcheck');
 
     }
 

@@ -1,10 +1,11 @@
 <body style="background: url(/assets/Images/AddSmp/BackCheck.jpg); background-repeat: no-repeat">
+<form>
 <div class="container" style="margin-top: 18%">
     <div class="row">
         <div class="col-md"></div>
         <div class="col-md">
             <label for="form">СМП</label>
-            <input type="text" class="form-control" id="name_SMP"  placeholder="Введите СМП" >
+            <input required type="text" name="name_SMP" class="form-control" id="name_SMP"  placeholder="Введите СМП"  >
         </div>
         <div class="col-md"></div>
     </div>
@@ -18,6 +19,6 @@
     </div>
     <div class="col-md-4"></div>
 </div>
-
+</form>
 
 <script type="text/javascript" src="/assets/Scripts/ADD_SMP_SCRIPT.js"></script>
