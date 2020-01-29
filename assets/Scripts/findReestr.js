@@ -59,14 +59,33 @@ $(document).ready(function() {
         var table_column=$(this).data('column_name');
         var value=$(this).text();
         $.ajax({
-            url:'find/update',
+            url:'find/valid',
             method:'POST',
             data:{id:id,
                 table_column:table_column,
                 value:value
             },
+            dataType:'json',
             success:function (data1) {
-                load_data();
+                if(data1.result=='notexist'){
+                    Toast('Текст уведомления');
+                 // alert('Проверьте правильность введенных данных');
+                    load_data();
+                }
+                if(data1.result=='exist'){
+                    $.ajax({
+                        url:'find/update',
+                        method:'POST',
+                        data:{id:id,
+                            table_column:table_column,
+                            value:value
+                        },
+                        success:function (data1) {
+                            load_data();
+                        }
+                    });
+                }
+
             }
         });
     });

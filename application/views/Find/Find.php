@@ -74,7 +74,17 @@
 </div>
 
 <div class="container">
-<table class="table table-bordered table-hover">
+    <div class="form-group">
+        <select name="state" id="maxRows" class="form-control" style="width: 150px">
+            <option value="5000">Показать все</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="35">35</option>
+            <option value="70">70</option>
+
+        </select>
+    </div>
+<table id="mytable" class="table table-bordered table-hover">
     <thead class="table-dark"">
     <tr>
     <td>Название СМП</td>
@@ -88,6 +98,12 @@
     <tbody>
     </tbody>
 </table>
+    <div>
+        <nav>
+            <ul class="pagination">
+            </ul>
+        </nav>
+    </div>
 </div>
 <script type="text/javascript" src="/assets/Scripts/findReestr.js"></script>
 
