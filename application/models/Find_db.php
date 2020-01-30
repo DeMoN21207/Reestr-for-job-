@@ -3,49 +3,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Find_db extends CI_Model
 {
-    public function GetOrgan()
-    {             //для получения контролирующего органа
+    public function GetOrgan()  //контролирующего органа
+    {
         $sql = $this->db->select('*')->from('contr')->get()->result_array();
         return $sql;
     }
 
-    public function GetSMP()
+    public function GetSMP() //получение  СМП
     {
         $sql = $this->db->select('*')->from('smp')->get()->result_array();
         return $sql;
     }
 
-    public function load_data()
-    {
-        $sql = $this->db->select('period.id_prov,smp.Name_SMP,contr.Name_contr,date_format(period.date_start,\'%d/%m/%Y\') as date1,date_format(period.date_end,\'%d/%m/%Y\') as date2,period.period_prov')->from('period')->join('smp', 'period.id_smp1 = smp.id_SMP', 'inner')->join('contr', 'period.id_contr1 = contr.id_contr', 'inner');
-        $sql = $this->db->get()->result_array();
-        return $sql;
-    }
 
-    public function GetIDNameSMP($NameSmp)
-    { //получение id по названию SMP
+
+    public function GetIDNameSMP($NameSmp)//получение id по названию SMP из бд smp
+    {
         return $this->db->select('id_smp')->from('smp')->where('Name_SMP', $NameSmp)->get()->result_array();
     }
 
-    public function GetIDContOrgan($ContOrgan)
-    { //получение id по названию контролирующего органа
+    public function GetIDContOrgan($ContOrgan) //получение id по названию контролирующего органа
+    {
         return $this->db->select('id_contr')->from('contr')->where('Name_contr', $ContOrgan)->get()->result_array();
     }
 
-    public function update($data, $id)
-    {                      //непосредственно обновление данных
+    public function update($data, $id) //обновление данных
+    {
         $this->db->where('id_prov', $id);
         $this->db->update('period', $data);
     }
 
-    public function delete($id)
-    {                            //удаление данных
+    public function delete($id) //удаление данных
+    {
         $this->db->where('id_prov', $id);
         $this->db->delete('period');
     }
 
-    public function param_table($name_smp, $name_org, $date_start, $date_end, $period)
-    { //вывод таблицы по запросу пользователя
+    public function param_table($name_smp, $name_org, $date_start, $date_end, $period)//формирование таблицы по запросу пользователя
+    {
 
         $sql = $this->db->select('period.id_prov,smp.Name_SMP,contr.Name_contr,date_format(period.date_start,\'%d/%m/%Y\') as date1,date_format(period.date_end,\'%d/%m/%Y\') as date2,period.period_prov')->from('period')->join('smp', 'period.id_smp1 = smp.id_SMP', 'inner')->join('contr', 'period.id_contr1 = contr.id_contr', 'inner');
         if (!empty($name_smp)) {
@@ -67,13 +62,13 @@ class Find_db extends CI_Model
         return $sql;
     }
 
-    public function import($data)
-    {                               //импорт данных
+    public function import($data) //импорт данных
+    {
         $this->db->insert_batch('period', $data);
 
     }
 
-    public function valid($table_column, $value)
+    public function valid($table_column, $value) //проверка на существование данных в таблице
     {
         $sql = $this->db->select('*');
         if ($table_column == 'id_smp1') {

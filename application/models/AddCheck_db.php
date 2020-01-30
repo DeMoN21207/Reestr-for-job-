@@ -3,30 +3,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AddCheck_db extends CI_Model
 {
-    public function GetOrgan()
-    {             //для получения контролирующего органа
+    public function GetOrgan() //получение контролирующего органа
+    {
         $sql = $this->db->select('*')->from('contr')->get()->result_array();
         return $sql;
     }
 
-    public function GetSMP()
+    public function GetSMP()//получение субьекта предпринимательства
     {
         $sql = $this->db->select('*')->from('smp')->get()->result_array();
         return $sql;
     }
 
-    public function GetIDNameSMP($NameSmp)
+    public function GetIDNameSMP($NameSmp) //получение id по названию SMP из бд smp
     { //получение id по названию SMP
         return $this->db->select('id_smp')->from('smp')->where('Name_SMP', $NameSmp)->get()->result_array();
     }
 
-    public function GetIDContOrgan($ContOrgan)
+    public function GetIDContOrgan($ContOrgan)//получение id по названию контролирующего органа
     { //получение id по названию контролирующего органа
         return $this->db->select('id_contr')->from('contr')->where('Name_contr', $ContOrgan)->get()->result_array();
     }
 
-    public function InsertCheck()
-    {                                                    //вставка проверки в бд
+    public function InsertCheck() //вставка проверки в бд
+    {
         $name_smp = $this->input->post('name1');
         $name_organ = $this->input->post('name2');
         $id_smp = $this->GetIDNameSMP($name_smp);

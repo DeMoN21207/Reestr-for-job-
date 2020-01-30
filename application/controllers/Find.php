@@ -11,11 +11,11 @@ class Find extends CI_Controller
     {
         parent::__construct();
         $this->load->model('find_db', 'm');
-        $this->load->library('table');
+
     }
 
 
-    public function index()
+    public function index() //загрузка стандартной страницы
     {
         $title['title'] = 'Поиск по реестру';
         $data['organ'] = $this->m->GetOrgan();
@@ -25,13 +25,9 @@ class Find extends CI_Controller
         $this->load->view('layout/footer');
     }
 
-    function load_data()
-    {                              //для построения при загрузке
-        $data = $this->m->load_data();
-        echo json_encode($data);
-    }
 
-    function param_table()
+
+   public function param_table()
     {//для построения таблицы по заданным параметрам
         $name_smp = $this->input->post('name_smp');
         $name_org = $this->input->post('name_org');
@@ -42,8 +38,8 @@ class Find extends CI_Controller
         echo json_encode($data1);
     }
 
-    function update()
-    {                  //обновление данных
+    public function update()   //обновление данных
+    {
         $NameColumn = $this->input->post('table_column');
         echo $NameColumn;
         $value = $this->input->post('value');
@@ -59,7 +55,7 @@ class Find extends CI_Controller
             $value = $Name_Contr[0]['id_contr'];         //получаем новый id по названию нового органа
         }
         if ($NameColumn == 'date_start') {
-            $new_Date = date("Y-m-d", strtotime($value));
+            $new_Date = date("Y-m-d", strtotime($value));// приводим к нужному формату
             $value = $new_Date;
         }
         if ($NameColumn == 'date_end') {
@@ -73,8 +69,8 @@ class Find extends CI_Controller
 
     }
 
-    public function delete()
-    {                           //удаление записи
+    public function delete()//удаление записи из таблицы
+    {
         $this->m->delete($this->input->post('id'));
 
     }
@@ -117,8 +113,8 @@ class Find extends CI_Controller
         echo json_encode('data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' . base64_encode($xlsData));
     }
 
-    public function import()
-    {                                   //импорт данных
+    public function import() //импорт данных
+    {
         if (isset($_FILES['file']['name'])) {
             $path = $_FILES['file']['tmp_name'];
             $object = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
@@ -155,7 +151,7 @@ class Find extends CI_Controller
 
     }
 
-    public function valid()
+    public function valid() //проверка введеныъ данных в форме на существование в бд
     {
         $table_column=$this->input->post('table_column');
         $value=$this->input->post('value');

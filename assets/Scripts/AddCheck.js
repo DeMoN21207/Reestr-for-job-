@@ -10,6 +10,13 @@ $("#form_valid").validate({
         },
         name3:'Введите дату начала проверки',
         name4:'Введите дату окончания проверки'
+    },
+    submitHandler: function(form) {
+        
+
+
+
+
     }
 });
 

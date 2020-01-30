@@ -29,17 +29,15 @@ class AddSmp extends CI_Controller
     public function valid()
     {
         $value = $this->input->post('name_smp');
-        if (isset($value)) {
+
             $query = $this->m->valid($value);
             if ($query) {
                 echo json_encode(array('result' => 'exist'));
             } else {
                 echo json_encode(array('result' => 'notexist'));
             }
-        }
-        else{
 
-        }
+
     }
 
 }
