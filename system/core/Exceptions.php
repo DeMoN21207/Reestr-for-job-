@@ -142,7 +142,7 @@ class CI_Exceptions {
 	// --------------------------------------------------------------------
 
 	/**
-	 * General Error Page
+	 * MainPage Error Page
 	 *
 	 * Takes an error message as input (either as a string or an array)
 	 * and displays it using the specified template.

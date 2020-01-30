@@ -6920,7 +6920,7 @@ function defaultPrefilter( elem, props, opts ) {
 	propTween = false;
 	for ( prop in orig ) {
 
-		// General show/hide setup for this element animation
+		// MainPage show/hide setup for this element animation
 		if ( !propTween ) {
 			if ( dataShow ) {
 				if ( "hidden" in dataShow ) {

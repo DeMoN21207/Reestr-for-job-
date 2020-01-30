@@ -11,8 +11,8 @@ class AddCheck extends CI_Controller
 
     }
 
-    public function index()
-    {            //стандартное отображение
+    public function index()  //загрузка основной страницы
+    {
         $title['title'] = 'Добавление проверки';
         $data['organ'] = $this->m->GetOrgan();
         $data['smp'] = $this->m->GetSMP();
@@ -21,11 +21,25 @@ class AddCheck extends CI_Controller
         $this->load->view('layout/footer');
     }
 
-    public function AddCheck()
+    public function AddCheck() //добавление проверки в
     {
         $this->m->InsertCheck();
-        redirect(base_url().'/addcheck');
 
     }
 
+    public function valid() //проверка на существование данных из формы в бд
+    {
+        $smp = $this->input->post('smp');
+        $control = $this->input->post('control');
+        $DateStart = $this->input->post('DateStart');
+        $DateEnd = $this->input->post('DateEnd');
+        $period = $this->input->post('period');
+        $query = $this->m->valid($smp, $control, $DateStart, $DateEnd, $period);
+
+        if ($query) {
+            echo json_encode(array('result' => 'exist'));
+        } else {
+            echo json_encode(array('result' => 'notexist'));
+        }
+    }
 }

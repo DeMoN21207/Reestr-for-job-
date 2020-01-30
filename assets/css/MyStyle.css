@@ -1,14 +1,15 @@
-.pas{
-    margin-top:50px;
+.pas {
+    margin-top: 50px;
 }
 
-.Name_input{
-    margin-top:25px;
+.Name_input {
+    margin-top: 25px;
 }
 
 input.error {
     border: 1px solid #ff0000;
 }
+
 label.error {
     color: #ff0000;
     font-weight: normal;
@@ -17,6 +18,7 @@ label.error {
 input.error {
     border: 1px solid #ff0000;
 }
+
 label.error {
     color: #ff0000;
     font-weight: normal;

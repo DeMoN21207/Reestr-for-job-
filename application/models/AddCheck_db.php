@@ -25,20 +25,28 @@ class AddCheck_db extends CI_Model
         return $this->db->select('id_contr')->from('contr')->where('Name_contr', $ContOrgan)->get()->result_array();
     }
 
-    public function InsertCheck() //вставка проверки в бд
+    public function InsertCheck() //вставка проверки СМП в бд
     {
-        $name_smp = $this->input->post('name1');
-        $name_organ = $this->input->post('name2');
+        $name_smp = $this->input->post('smp');
+        $name_organ = $this->input->post('control');
         $id_smp = $this->GetIDNameSMP($name_smp);
         $id_organ = $this->GetIDContOrgan($name_organ);
 
         $data = array(
             'id_smp1' => $id_smp[0]['id_smp'],
             'id_contr1' => $id_organ[0]['id_contr'],
-            'date_start' => $this->input->post('name3'),
-            'date_end' => $this->input->post('name4'),
-            'period_prov' => $this->input->post('name5')
+            'date_start' => $this->input->post('DateStart'),
+            'date_end' => $this->input->post('DateEnd'),
+            'period_prov' => $this->input->post('period')
         );
         return $this->db->insert('period', $data);
+    }
+
+    public function valid($smp,$control,$DateStart,$DateEnd,$period){ //проверка наличия Новой проверки СМП в бд
+           $idSMP1=$this->GetIDNameSMP($smp);
+           $idCONTR1=$this->GetIDContOrgan($control);
+           $idSMP=$idSMP1[0]['id_smp'];
+           $idCONTR=$idCONTR1[0]['id_contr'];
+           return $this->db->select('*')->from('period')->where('id_smp1',$idSMP)->where('id_contr1',$idCONTR)->where('date_start',$DateStart)->where("date_end",$DateEnd)->where('period_prov',$period)->get()->result_array();
     }
 }

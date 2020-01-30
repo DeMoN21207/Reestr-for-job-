@@ -26,9 +26,8 @@ class Find extends CI_Controller
     }
 
 
-
-   public function param_table()
-    {//для построения таблицы по заданным параметрам
+    public function param_table() //для построения таблицы по заданным параметрам
+    {
         $name_smp = $this->input->post('name_smp');
         $name_org = $this->input->post('name_org');
         $date_start = $this->input->post('date_start');
@@ -51,11 +50,11 @@ class Find extends CI_Controller
         }
 
         if ($NameColumn == "id_contr1") {
-            $Name_Contr = $this->m->GetIDContOrgan($value);
-            $value = $Name_Contr[0]['id_contr'];         //получаем новый id по названию нового органа
+            $Name_Contr = $this->m->GetIDContOrgan($value);   //получаем новый id по названию нового органа
+            $value = $Name_Contr[0]['id_contr'];
         }
         if ($NameColumn == 'date_start') {
-            $new_Date = date("Y-m-d", strtotime($value));// приводим к нужному формату
+            $new_Date = date("Y-m-d", strtotime($value));// приводим к нужному формату дату(для MySQL)
             $value = $new_Date;
         }
         if ($NameColumn == 'date_end') {
@@ -69,7 +68,7 @@ class Find extends CI_Controller
 
     }
 
-    public function delete()//удаление записи из таблицы
+    public function delete() //удаление записи из таблицы
     {
         $this->m->delete($this->input->post('id'));
 
@@ -153,14 +152,13 @@ class Find extends CI_Controller
 
     public function valid() //проверка введеныъ данных в форме на существование в бд
     {
-        $table_column=$this->input->post('table_column');
-        $value=$this->input->post('value');
-        $query=$this->m->valid($table_column,$value);
-        if($query){
-            echo  json_encode(array('result'=>'exist'));
-        }
-        else{
-            echo json_encode(array('result'=>'notexist'));
+        $table_column = $this->input->post('table_column');
+        $value = $this->input->post('value');
+        $query = $this->m->valid($table_column, $value);
+        if ($query) {
+            echo json_encode(array('result' => 'exist'));
+        } else {
+            echo json_encode(array('result' => 'notexist'));
         }
     }
 

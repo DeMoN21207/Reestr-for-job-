@@ -9,7 +9,7 @@ class AddOrgan extends CI_Controller
         $this->load->model('addorgan_db', 'm');
     }
 
-    public function index()
+    public function index() //загрузка начальной страницы
     {
         $title['title'] = "Контролирующий орган";
         $this->load->view('layout/header', $title);
@@ -18,23 +18,24 @@ class AddOrgan extends CI_Controller
 
     }
 
-    public function AddContr()
+    public function AddContr() //добавление контролирующего органа в бд
     {
         $name_contr = $this->input->post('name_contr');
         if (!empty($name_contr)) {
             $this->m->addcontr($name_contr);
         }
     }
-    public function valid()
+
+    public function valid() //проверка на существование нового органа в бд
     {
         $value = $this->input->post('name_contr');
 
-            $query = $this->m->valid($value);
-            if ($query) {
-                echo json_encode(array('result' => 'exist'));
-            } else {
-                echo json_encode(array('result' => 'notexist'));
-            }
+        $query = $this->m->valid($value);
+        if ($query) {
+            echo json_encode(array('result' => 'exist'));
+        } else {
+            echo json_encode(array('result' => 'notexist'));
+        }
 
     }
 }

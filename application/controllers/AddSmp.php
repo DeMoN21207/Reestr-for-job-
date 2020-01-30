@@ -9,7 +9,7 @@ class AddSmp extends CI_Controller
         $this->load->model('addsmp_db', 'm');
     }
 
-    public function index()
+    public function index() //загрузка основной страницы добавления смп
     {
         $title['title'] = 'Добавить СМП';
         $this->load->view('layout/header', $title);
@@ -18,7 +18,7 @@ class AddSmp extends CI_Controller
 
     }
 
-    public function AddSMP()
+    public function AddSMP() //добавление нового СМП в бд
     {
         $name_smp = $this->input->post('name_smp');
         if (!empty($name_smp)) {
@@ -26,16 +26,16 @@ class AddSmp extends CI_Controller
         }
     }
 
-    public function valid()
+    public function valid() //проверка на существование нового СМП в бд
     {
         $value = $this->input->post('name_smp');
 
-            $query = $this->m->valid($value);
-            if ($query) {
-                echo json_encode(array('result' => 'exist'));
-            } else {
-                echo json_encode(array('result' => 'notexist'));
-            }
+        $query = $this->m->valid($value);
+        if ($query) {
+            echo json_encode(array('result' => 'exist'));
+        } else {
+            echo json_encode(array('result' => 'notexist'));
+        }
 
 
     }

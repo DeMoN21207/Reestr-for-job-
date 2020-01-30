@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class General extends CI_Controller
+class MainPage extends CI_Controller
 {
     function __construct()
     {
@@ -9,12 +9,11 @@ class General extends CI_Controller
 
     }
 
-
-    public function index()
+    public function index() //загрузка отображения главной страницы
     {
         $title['title'] = 'Главная';
         $this->load->view("layout/header", $title);
-        $this->load->view('general/general_panel');
+        $this->load->view('mainpage/mainpage');
         $this->load->view("layout/footer");
     }
 

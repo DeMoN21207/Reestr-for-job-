@@ -17,7 +17,7 @@
  *
  *   A. Corporations
  *   B. LLCs
- *   C. General partnerships
+ *   C. MainPage partnerships
  *   D. Companies limited partnerships
  *   E. Communities of goods
  *   F. Cooperative Societies
