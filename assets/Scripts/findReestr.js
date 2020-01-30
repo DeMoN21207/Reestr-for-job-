@@ -28,7 +28,7 @@ $(document).ready(function () {
                 'period': period
             },
             dataType: 'JSON',
-            success: function (data1) {
+            success: function (data1) {                     //отрисовка таблицы по выбраным позициям пользователя
                 var html1 = '<div class="ForReplace">';
                 for (var count = 0; count < data1.length; count++) {
                     html1 += '<tr>';
@@ -75,7 +75,7 @@ $(document).ready(function () {
                     }).show();
                     load_data();
                 }
-                if (data1.result == 'exist') {
+                if (data1.result == 'exist') {  //успешное обновление если данные есть в системе
                     $.ajax({
                         url: 'find/update',
                         method: 'POST',
@@ -94,7 +94,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click', '.delete', function () {                    //удаление
+    $(document).on('click', '.delete', function () {                    //удаление проверки
         var id = $(this).data('delete');
         $.ajax({
             url: "find/delete",
@@ -106,7 +106,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#export').click(function () {                                  //экспорт таблицы в excel
+    $('#export').click(function () {                                  // экспорт таблицы в excel
         var name_smp, name_org, date_start, date_end, period;
         name_smp = $('#input_smp').val();
         name_org = $('#input_control').val();
@@ -135,7 +135,7 @@ $(document).ready(function () {
     });
 
     var table = '#mytable';
-    $('#maxRows').on('change', function () {
+    $('#maxRows').on('change', function () {    //скрипт для создания постраничной пагинации
         $('.pagination').html('');
         var trnum = 0;
         var maxRows = parseInt($(this).val());

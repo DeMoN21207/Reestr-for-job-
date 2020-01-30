@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-    $("#AddSMP").validate({
+    $("#AddSMP").validate({         //задание правил для валидации формы
         rules: {
             name_SMP1: {
                 required: true,
@@ -19,7 +19,7 @@ $(document).ready(function () {
 
 
     $('#addsmp').click(function () {
-        if ($("#name_SMP").valid()) {
+        if ($("#name_SMP").valid()) { //условие на заполненность формы
             var name_smp = $("#name_SMP").val();
             $.ajax({
                 method: 'post',

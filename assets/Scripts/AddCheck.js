@@ -41,14 +41,14 @@ $(document).ready(function () {
         }
     });
 
-    $("#add_to_bd").on('click', function () {         //проверка на наличии записи в бд
+    $("#add_to_bd").on('click', function () {
         if ($("#form_valid").valid()) {
             var smp = $('#input_smp').val();
             var control = $('#input_control').val();
             var DateStart = $('#date_start').val();
             var DateEnd = $('#date_end').val();
             var period = $('#period').val();
-            $.ajax({
+            $.ajax({                              //проверка на наличии записи в бд
                 method: 'POST',
                 url: 'addcheck/valid',
                 data: {
@@ -68,7 +68,7 @@ $(document).ready(function () {
                         }).show();
                     }
                     if (data.result == "notexist") {
-                        $.ajax({
+                        $.ajax({                    //добавление в систему если уникальна
                             method: 'POST',
                             url: 'addcheck/addcheck',
                             data: {

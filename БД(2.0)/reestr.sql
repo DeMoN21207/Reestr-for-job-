@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 08 2020 г., 23:31
+-- Время создания: Янв 30 2020 г., 22:16
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.9
 
@@ -39,10 +39,15 @@ CREATE TABLE `contr` (
 
 INSERT INTO `contr` (`id_contr`, `Name_contr`) VALUES
 (5, 'Леснадзор'),
+(11, 'Министерство финансов'),
+(10, 'Налоговая'),
+(12, 'Пельменьнадзор'),
 (7, 'Пожарный надзор'),
 (2, 'Росгидромет'),
+(8, 'Роспотехнадзор'),
 (1, 'Роспотребнадзор'),
 (3, 'Росприроднадзор'),
+(9, 'Ростехпотехнадзор'),
 (4, 'Рыбнадзор');
 
 -- --------------------------------------------------------
@@ -65,11 +70,25 @@ CREATE TABLE `period` (
 --
 
 INSERT INTO `period` (`id_prov`, `id_smp1`, `id_contr1`, `date_start`, `date_end`, `period_prov`) VALUES
-(8, 7, 2, '2003-12-20', '2003-12-20', 4),
-(12, 1, 2, '2019-09-12', '2019-09-12', 3),
-(14, 7, 1, '1970-01-01', '1970-01-01', 3),
-(19, 7, 1, '1970-01-01', '1970-01-01', 3),
-(21, 19, 1, '2020-01-09', '2020-01-12', 5);
+(23, 6, 8, '2020-01-06', '2020-01-31', 6),
+(27, 10, 3, '2020-01-11', '2020-01-14', 3),
+(26, 12, 2, '2020-01-10', '2020-01-15', 8),
+(22, 12, 2, '2020-01-16', '2020-01-09', 7),
+(21, 19, 1, '2020-09-01', '2020-01-12', 5),
+(42, 20, 5, '2020-01-18', '2020-01-19', 6),
+(29, 29, 2, '2020-01-10', '2020-01-09', 4),
+(25, 30, 2, '2020-01-06', '2020-01-08', 9),
+(40, 30, 5, '2020-01-04', '2020-01-04', 2),
+(28, 30, 7, '1970-01-01', '2020-01-26', 8),
+(41, 30, 12, '2020-01-01', '2020-01-02', 2),
+(30, 31, 7, '2020-01-18', '2020-01-14', 2),
+(33, 32, 5, '2020-01-08', '2020-01-15', 4),
+(34, 32, 5, '2020-01-08', '2020-01-15', 5),
+(31, 32, 8, '2020-01-08', '2020-01-15', 4),
+(32, 32, 8, '2020-01-08', '2020-01-15', 4),
+(36, 35, 10, '2020-01-18', '2020-01-10', 8),
+(39, 44, 10, '2020-01-02', '2020-01-08', 2),
+(43, 46, 12, '2020-01-01', '2020-01-04', 6);
 
 -- --------------------------------------------------------
 
@@ -88,7 +107,16 @@ CREATE TABLE `smp` (
 
 INSERT INTO `smp` (`id_SMP`, `Name_SMP`) VALUES
 (30, 'AlpenGold'),
+(44, 'Bloody'),
+(32, 'Radio Record'),
+(35, 'Radio Record1'),
+(34, 'Retro FM'),
+(42, 'StealSeries'),
+(43, 'StealSeries1'),
 (19, 'Алиэкспресс'),
+(36, 'Вкуснолюбов'),
+(37, 'Вкуснолюбов1'),
+(31, 'ЗАО Лунатики'),
 (22, 'ЗАО Тинькофф'),
 (12, 'ИП Иванов'),
 (14, 'ИП Измайлов'),
@@ -108,12 +136,16 @@ INSERT INTO `smp` (`id_SMP`, `Name_SMP`) VALUES
 (9, 'ОАО Ростелеком'),
 (18, 'ОАО Сбербанк'),
 (5, 'ОАО ЧАЙКА'),
+(46, 'ОДО Пельмени'),
 (8, 'ООО \"Solar\"'),
 (1, 'ООО \"Ёжики\"'),
+(41, 'ООО ZTE'),
 (15, 'ООО Кабинеты'),
 (11, 'ООО Росгосстрах'),
 (7, 'ООО Роснефть'),
+(45, 'ООО ФТС'),
 (4, 'ООО\"Ветерок\"'),
+(33, 'Простоквашино'),
 (29, 'Рошен');
 
 --
@@ -131,7 +163,10 @@ ALTER TABLE `contr`
 -- Индексы таблицы `period`
 --
 ALTER TABLE `period`
-  ADD PRIMARY KEY (`id_prov`);
+  ADD PRIMARY KEY (`id_prov`),
+  ADD KEY `FK_Contr` (`id_contr1`) USING BTREE,
+  ADD KEY `FK_SMP` (`id_smp1`) USING BTREE,
+  ADD KEY `FindPeriod` (`id_smp1`,`id_contr1`,`date_start`,`date_end`,`period_prov`);
 
 --
 -- Индексы таблицы `smp`
@@ -148,19 +183,30 @@ ALTER TABLE `smp`
 -- AUTO_INCREMENT для таблицы `contr`
 --
 ALTER TABLE `contr`
-  MODIFY `id_contr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_contr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `period`
 --
 ALTER TABLE `period`
-  MODIFY `id_prov` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_prov` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT для таблицы `smp`
 --
 ALTER TABLE `smp`
-  MODIFY `id_SMP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_SMP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `period`
+--
+ALTER TABLE `period`
+  ADD CONSTRAINT `ID_Contr` FOREIGN KEY (`id_contr1`) REFERENCES `contr` (`id_contr`),
+  ADD CONSTRAINT `period` FOREIGN KEY (`id_smp1`) REFERENCES `smp` (`id_SMP`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

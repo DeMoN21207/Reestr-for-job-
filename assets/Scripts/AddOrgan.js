@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $("#contrForm").validate({
+    $("#contrForm").validate({  //добавление правил для валидации
         rules: {
             name_contr: {
                 required: true,
@@ -17,7 +17,7 @@ $(document).ready(function () {
     });
 
     $('#addcontr').click(function () {
-        if ($('#name_contr').valid()) {
+        if ($('#name_contr').valid()) { //условие для проверки заполненности формы
             var name_contr = $("#name_contr").val();
             $.ajax({
                 method: 'post',
@@ -32,7 +32,7 @@ $(document).ready(function () {
                             text: 'Орган уже существует в системе!'
                         }).show();
                     }
-                    if (data.result == 'notexist') {
+                    if (data.result == 'notexist') { //добавление уникальной записи
                         $.ajax({
                             method: 'post',
                             url: 'addorgan/addcontr',
